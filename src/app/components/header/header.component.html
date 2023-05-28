@@ -1,23 +1,36 @@
 <nav class="navbar shadow">
   <div class="container">
-
-    <a class="navbar-brand">
-      <img src="/assets/logo_200x200.jpg" alt="Notazero" width="55" height="55" class="rounded-circle">
+    <a routerLink="/" class="navbar-brand">
+      <img
+        src="/assets/logo_200x200.jpg"
+        alt="Notazero"
+        width="60"
+        height="60"
+        class="rounded-circle"
+      />
     </a>
 
     <div class="dropdown-center">
-      <button class="btn btn-sm btn-light dropdown-toggle" type="button" data-bs-toggle="dropdown"
-        aria-expanded="false">
-        Hola, {{"Nombre Usuario"}}
+      <button
+        class="btn btn-sm btn-light dropdown-toggle"
+        type="button"
+        data-bs-toggle="dropdown"
+        aria-expanded="false"
+      >
+        Hola, {{ "Nombre Usuario" }}
       </button>
       <ul class="dropdown-menu">
         <li>
-          <h4 class="dropdown-header">{{"Nombre Usuario"}}</h4>
+          <h5 class="dropdown-header">{{ "Nombre Usuario" }}</h5>
         </li>
         <li>
-          <hr class="dropdown-divider">
+          <hr class="dropdown-divider" />
         </li>
-        <li><a class="dropdown-item"><i class="bi bi-power"></i> Salir</a></li>
+        <li>
+          <a class="dropdown-item text-small"
+            ><i class="bi bi-power"></i> Salir</a
+          >
+        </li>
       </ul>
     </div>
   </div>
