@@ -13,15 +13,28 @@ import { catchError, map } from 'rxjs/operators';
   providedIn: 'root',
 })
 export class CrudService {
-  private REST_API: string =
-    'https://ht9pf12136.execute-api.us-east-1.amazonaws.com/items/97c46667-8f11-4987-a1e8-21404d6e982d/materias'; //ToDo: /items/{userId}/materias
+  private REST_API: string;
   httpHeaders = new HttpHeaders().set('Content-Type', 'application/json');
 
-  constructor(private httpClient: HttpClient) {}
+  constructor(private httpClient: HttpClient) {
+    // Obtener el token de la URL
+    const url = window.location.href;
+    const tokenIndex = url.indexOf('#id_token=') + '#id_token='.length;
+    const tokenEndIndex = url.indexOf('&');
+    const token = url.substring(tokenIndex, tokenEndIndex);
+
+    // Decodificar el token y obtener el userId
+    const decodedToken = JSON.parse(atob(token.split('.')[1]));
+    const userId = decodedToken.sub;
+
+    // Construir la URL de la API con el userId
+    this.REST_API = `https://ht9pf12136.execute-api.us-east-1.amazonaws.com/items/${userId}/materias`;
+  }
 
   getMaterias(): Observable<any> {
     return this.httpClient.get(this.REST_API, { headers: this.httpHeaders });
   }
+
   getMateria(id: any): Observable<any> {
     return this.httpClient
       .get(`${this.REST_API}/${id}`, { headers: this.httpHeaders })
@@ -33,12 +46,14 @@ export class CrudService {
   }
 
   createMateria(data: Materias): Observable<any> {
+    //ToDo: Ver como cambar la rireccion de API para el PUT
     return this.httpClient
       .post(this.REST_API, data, { headers: this.httpHeaders })
       .pipe(catchError(this.handleError));
   }
 
   updateMateria(id: any, data: any): Observable<any> {
+    //ToDo: Ver como cambar la rireccion de API para el PUT
     return this.httpClient
       .put(`${this.REST_API}/${id}`, data, { headers: this.httpHeaders })
       .pipe(catchError(this.handleError));

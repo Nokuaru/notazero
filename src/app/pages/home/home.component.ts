@@ -17,9 +17,7 @@ export class HomeComponent implements OnInit {
   ngOnInit(): void {
     this.crudeService.getMaterias().subscribe((res: any) => {
       this.usuario = [res.user];
-      console.log(this.usuario);
       this.materias = res.materias;
-      console.log(this.materias);
     });
   }
 }
