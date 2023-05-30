@@ -1,5 +1,4 @@
 export interface Materias {
-  _id: string;
   userId: string;
   materiaId: string;
   materia: string;

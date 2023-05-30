@@ -13,8 +13,8 @@ export class HomeComponent implements OnInit {
   constructor(private crudeService: CrudService) {}
 
   ngOnInit(): void {
-    this.crudeService.getMaterias().subscribe((res: Materias[]) => {
-      this.materias = res;
+    this.crudeService.getMaterias().subscribe((res: any) => {
+      this.materias = res.materias;
       console.log(this.materias);
     });
   }

@@ -11,13 +11,13 @@
       </tr>
     </thead>
     <tbody>
-      <tr>
-        <th scope="row">1°</th>
-        <td>2°</td>
-        <td>Desarrollo de aplicaicones en la nube</td>
-        <td>mie 20:30 a 22:30 y jue 18:30 a 22:30</td>
+      <tr *ngFor="let materia of materias">
+        <th scope="row">{{ materia.anio }}</th>
+        <td>{{ materia.cuatrimestre }}</td>
+        <td>{{ materia.materia }}</td>
+        <td>{{ materia.horario }}</td>
         <td>
-          <span class="badge rounded-pill text-bg-primary">En curso</span>
+          <span class="badge rounded-pill text-bg-primary">{{ materia.estado }}</span>
         </td>
         <td>
           <a routerLink="/show" class="btn btn-sm">
