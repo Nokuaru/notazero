@@ -13,6 +13,8 @@ import { AngularMaterialModule } from './components/angular-material/angular-mat
 import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { TableComponent } from './components/table/table.component';
+import { HttpClientModule } from '@angular/common/http';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -31,6 +33,9 @@ import { TableComponent } from './components/table/table.component';
     AppRoutingModule,
     BrowserAnimationsModule,
     AngularMaterialModule,
+    HttpClientModule,
+    FormsModule,
+    ReactiveFormsModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
