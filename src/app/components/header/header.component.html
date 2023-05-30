@@ -1,35 +1,23 @@
 <nav class="navbar shadow">
   <div class="container">
     <a routerLink="/" class="navbar-brand">
-      <img
-        src="/assets/logo_200x200.jpg"
-        alt="Notazero"
-        width="60"
-        height="60"
-        class="rounded-circle"
-      />
+      <img src="/assets/logo_200x200.jpg" alt="Notazero" width="60" height="60" class="rounded-circle" />
     </a>
 
-    <div class="dropdown-center">
-      <button
-        class="btn btn-sm btn-light dropdown-toggle"
-        type="button"
-        data-bs-toggle="dropdown"
-        aria-expanded="false"
-      >
-        Hola, {{ "Nombre Usuario" }}
+    <div *ngFor="let usuarioItem of usuario" class="dropdown-center">
+      <button class="btn btn-sm btn-light dropdown-toggle" type="button" data-bs-toggle="dropdown"
+        aria-expanded="false">
+        Hola, {{ usuarioItem.name }}
       </button>
       <ul class="dropdown-menu">
         <li>
-          <h5 class="dropdown-header">{{ "Nombre Usuario" }}</h5>
+          <h4 class="dropdown-header">{{ usuarioItem.name }}</h4>
         </li>
         <li>
           <hr class="dropdown-divider" />
         </li>
         <li>
-          <a class="dropdown-item text-small"
-            ><i class="bi bi-power"></i> Salir</a
-          >
+          <a class="dropdown-item text-small"><i class="bi bi-power"></i> Salir</a>
         </li>
       </ul>
     </div>
