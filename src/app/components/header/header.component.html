@@ -1,21 +1,32 @@
 <nav class="navbar shadow">
   <div class="container">
     <a routerLink="/home" class="navbar-brand">
-      <img src="/assets/logo_200x200.jpg" alt="Notazero" width="60" height="60" class="rounded-circle" />
+      <img
+        src="/assets/logo_200x200.jpg"
+        alt="Notazero"
+        width="60"
+        height="60"
+        class="rounded-circle"
+      />
     </a>
 
     <div class="dropdown-center">
-      <button class="btn btn-light dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+      <button
+        class="btn btn-light dropdown-toggle"
+        type="button"
+        data-bs-toggle="dropdown"
+        aria-expanded="false"
+      >
         <i class="bi bi-person-circle text-muted me-2"></i>
       </button>
       <ul class="dropdown-menu">
         <li>
-          <a href="https://authnotazero.auth.us-east-1.amazoncognito.com/login?client_id=4i1jp7j7jkhscvmco4i2bnkkhf&response_type=token&scope=aws.cognito.signin.user.admin+email+openid+phone&redirect_uri=http%3A%2F%2Flocalhost%3A4200%2F"
-            class="dropdown-item"><i class="bi bi-box-arrow-in-right"></i> login</a>
-        </li>
-        <li>
-          <a href="https://authnotazero.auth.us-east-1.amazoncognito.com/logout?client_id=4i1jp7j7jkhscvmco4i2bnkkhf&response_type=token&scope=aws.cognito.signin.user.admin+email+openid+phone&redirect_uri=http%3A%2F%2Flocalhost%3A4200%2F"
-            class="dropdown-item" (click)="logout()"><i class="bi bi-power"></i> Salir</a>
+          <a
+            href="https://authnotazero.auth.us-east-1.amazoncognito.com/logout?client_id=4i1jp7j7jkhscvmco4i2bnkkhf&response_type=token&scope=aws.cognito.signin.user.admin+email+openid+phone&redirect_uri=http%3A%2F%2Flocalhost%3A4200%2F"
+            class="dropdown-item"
+            (click)="logout()"
+            ><i class="bi bi-power"></i> Salir</a
+          >
         </li>
       </ul>
     </div>
