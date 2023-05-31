@@ -6,6 +6,4 @@ import { Usuario } from 'src/app/models/usuario.model';
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.css'],
 })
-export class HeaderComponent {
-  @Input() usuario: Usuario[] = [];
-}
+export class HeaderComponent {}
