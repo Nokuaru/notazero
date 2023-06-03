@@ -27,6 +27,9 @@ export class CrudService {
     const decodedToken = JSON.parse(atob(token.split('.')[1]));
     const userId = decodedToken.sub;
 
+    // Guardar el token en sessionStorage
+    sessionStorage.setItem('token', token);
+
     // Construir la URL de la API con el userId --> ${userId}
     this.REST_API = `https://ht9pf12136.execute-api.us-east-1.amazonaws.com/items/${userId}/materias`;
   }
@@ -46,14 +49,14 @@ export class CrudService {
   }
 
   createMateria(data: Materias): Observable<any> {
-    //ToDo: Ver como cambar la rireccion de API para el PUT
+    //ToDo: Ver como cambiar la dirección de API para el PUT
     return this.httpClient
       .post(this.REST_API, data, { headers: this.httpHeaders })
       .pipe(catchError(this.handleError));
   }
 
   updateMateria(id: any, data: any): Observable<any> {
-    //ToDo: Ver como cambar la rireccion de API para el PUT
+    //ToDo: Ver como cambiar la dirección de API para el PUT
     return this.httpClient
       .put(`${this.REST_API}/${id}`, data, { headers: this.httpHeaders })
       .pipe(catchError(this.handleError));
