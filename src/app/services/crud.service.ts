@@ -31,7 +31,7 @@ export class CrudService {
     sessionStorage.setItem('userId', userId);
 
     // Construir la URL de la API con el userId --> ${userId}
-    this.REST_API = `https://ht9pf12136.execute-api.us-east-1.amazonaws.com/items/${userId}/materias`;
+    this.REST_API = `https://ht9pf12136.execute-api.us-east-1.amazonaws.com/items/97c46667-8f11-4987-a1e8-21404d6e982d/materias`;
   }
 
   getMaterias(): Observable<any> {
