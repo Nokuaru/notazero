@@ -24,11 +24,11 @@ export class CrudService {
     const token = url.substring(tokenIndex, tokenEndIndex);
 
     // Decodificar el token y obtener el userId
-    const decodedToken = JSON.parse(atob(token.split('.')[1]));
-    const userId = decodedToken.sub;
+    //const decodedToken = JSON.parse(atob(token.split('.')[1]));
+    //const userId = decodedToken.sub;
 
     // Guardar el token en sessionStorage
-    sessionStorage.setItem('userId', userId);
+    sessionStorage.setItem('token', token);
 
     // Construir la URL de la API con el userId --> ${userId}
     this.REST_API = `https://ht9pf12136.execute-api.us-east-1.amazonaws.com/items/97c46667-8f11-4987-a1e8-21404d6e982d/materias`;
