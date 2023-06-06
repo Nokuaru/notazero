@@ -60,6 +60,7 @@ export class CrudService {
   }
 
   deleteMateria(id: any): Observable<any> {
+    //ToDo: Ver como cambar la rireccion de API para el DELETE
     return this.httpClient
       .delete(`${this.REST_API}/${id}`, { headers: this.httpHeaders })
       .pipe(catchError(this.handleError));
