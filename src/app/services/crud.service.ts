@@ -18,14 +18,17 @@ export class CrudService {
 
   constructor(private httpClient: HttpClient) {
     // Obtener el token de la URL
-    //const url = window.location.href;
-    //const tokenIndex = url.indexOf('#id_token=') + '#id_token='.length;
-    //const tokenEndIndex = url.indexOf('&');
-    //const token = url.substring(tokenIndex, tokenEndIndex);
+    const url = window.location.href;
+    const tokenIndex = url.indexOf('#id_token=') + '#id_token='.length;
+    const tokenEndIndex = url.indexOf('&');
+    const token = url.substring(tokenIndex, tokenEndIndex);
 
     // Decodificar el token y obtener el userId
-    //const decodedToken = JSON.parse(atob(token.split('.')[1]));
-    //const userId = decodedToken.sub;
+    const decodedToken = JSON.parse(atob(token.split('.')[1]));
+    const userId = decodedToken.sub;
+
+    // Guardar el token en sessionStorage
+    sessionStorage.setItem('userId', userId);
 
     // Construir la URL de la API con el userId --> ${userId}
     this.REST_API = `https://ht9pf12136.execute-api.us-east-1.amazonaws.com/items/97c46667-8f11-4987-a1e8-21404d6e982d/materias`;
@@ -46,14 +49,14 @@ export class CrudService {
   }
 
   createMateria(data: Materias): Observable<any> {
-    //ToDo: Ver como cambar la rireccion de API para el PUT
+    //ToDo: Ver como cambiar la dirección de API para el PUT
     return this.httpClient
       .post(this.REST_API, data, { headers: this.httpHeaders })
       .pipe(catchError(this.handleError));
   }
 
   updateMateria(id: any, data: any): Observable<any> {
-    //ToDo: Ver como cambar la rireccion de API para el PUT
+    //ToDo: Ver como cambiar la dirección de API para el PUT
     return this.httpClient
       .put(`${this.REST_API}/${id}`, data, { headers: this.httpHeaders })
       .pipe(catchError(this.handleError));
