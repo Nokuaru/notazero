@@ -16,6 +16,7 @@ import { TableComponent } from './components/table/table.component';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { LoginComponent } from './pages/login/login.component';
+import { SignupComponent } from './pages/signup/signup.component';
 
 @NgModule({
   declarations: [
@@ -29,6 +30,7 @@ import { LoginComponent } from './pages/login/login.component';
     FooterComponent,
     TableComponent,
     LoginComponent,
+    SignupComponent,
   ],
   imports: [
     BrowserModule,

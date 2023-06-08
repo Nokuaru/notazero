@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Materias } from 'src/app/models/materias.model';
-import { Usuario } from 'src/app/models/usuario.model';
+import { User } from 'src/app/models/user.model';
 import { CrudService } from 'src/app/services/crud.service';
 
 @Component({
@@ -10,7 +10,7 @@ import { CrudService } from 'src/app/services/crud.service';
 })
 export class HomeComponent implements OnInit {
   materias: Materias[] = [];
-  usuario: Usuario[] = [];
+  usuario: User[] = [];
 
   constructor(private crudeService: CrudService) {}
 
