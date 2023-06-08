@@ -8,47 +8,68 @@ import { User } from '../models/user.model';
 })
 export class CognitoService {
   constructor() {
+    // Configuración de Amplify
     Amplify.configure({
       Auth: environment.cognito,
     });
   }
 
+  // Registro de usuario
   public signUp(user: User): Promise<any> {
     return Auth.signUp({
       username: user.email,
       password: user.password,
       attributes: {
         email: user.email,
-        given_name: user.givenName,
-        family_name: user.familyName,
+        name: user.name,
       },
     });
   }
+
+  // Confirmación de registro
   public confirmSignUp(user: User): Promise<any> {
     return Auth.confirmSignUp(user.email, user.code);
   }
 
-  // este metodo retorna la informacion del usuario si hay algun usuario logea si es
-  // valido el email y contraseña
-  public getUser(): Promise<any> {
-    return Auth.currentUserInfo();
+  // Obtener información del usuario actualmente logueado
+  public getUser(): Promise<string> {
+    return Auth.currentUserInfo().then((userInfo) => {
+      const sub = userInfo.attributes.sub;
+      sessionStorage.setItem('userSub', sub); // Guardar el sub en sessionStorage
+      return sub;
+    });
   }
 
+  // Inicio de sesión
   public signIn(user: User): Promise<any> {
     return Auth.signIn(user.email, user.password);
   }
 
+  // Cierre de sesión
   public signOut(): Promise<any> {
     return Auth.signOut();
   }
 
-  // este metodo envia un nuevo codigo al email del usuario
+  // Recuperación de contraseña (enviar código al email del usuario)
   public forgotPassword(user: User): Promise<any> {
     return Auth.forgotPassword(user.email);
   }
 
-  // este metodo crea una nueva contraseña lo envia al mail
+  // Envío de nueva contraseña para recuperar contraseña olvidada
   public forgotPasswordSubmit(user: User, newPassword: string): Promise<any> {
     return Auth.forgotPasswordSubmit(user.email, user.code, newPassword);
+  }
+
+  // Verificar si hay un usuario autenticado
+  public isAuthenticated(): Promise<boolean> {
+    return new Promise<boolean>((resolve, reject) => {
+      Auth.currentAuthenticatedUser()
+        .then(() => {
+          resolve(true); // Usuario autenticado
+        })
+        .catch(() => {
+          resolve(false); // Usuario no autenticado
+        });
+    });
   }
 }

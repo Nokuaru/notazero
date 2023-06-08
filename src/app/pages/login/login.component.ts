@@ -27,13 +27,13 @@ export class LoginComponent implements OnInit {
       this.cognitoService
         .signIn(this.user)
         .then(() => {
-          this.router.navigate(['/']);
+          this.router.navigate(['/home']);
         })
         .catch((error: any) => {
           this.displayAlert(error.message);
         });
     } else {
-      this.displayAlert('Ingrese un email y/o una contraseña valida');
+      this.displayAlert('Ingrese un email o contraseña válido');
     }
   }
 
@@ -75,29 +75,9 @@ export class LoginComponent implements OnInit {
       this.displayAlert('Por favor ingrese bien los datos');
     }
   }
+
   private displayAlert(message: string) {
     this.alertMessage = message;
     this.showAlert = true;
   }
-
-  //constructor(private router: Router) {}
-  //ngOnInit(): void {
-  //const url = window.location.href;
-  //const token = this.extractTokenFromUrl(url);
-  //if (token) {
-  //  sessionStorage.setItem('token', token);
-  //  this.router.navigate(['/home']);
 }
-//}
-
-//private extractTokenFromUrl(url: string): string | null {
-// const tokenRegex = /id_token=([^&]+)/;
-// const match = url.match(tokenRegex);
-
-// if (match && match.length > 1) {
-//   return match[1];
-// }
-
-// return null;
-//}
-//}
