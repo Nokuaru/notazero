@@ -15,7 +15,7 @@ const routes: Routes = [
   { path: 'show', component: ShowComponent, canActivate: [AuthGuard] },
   { path: 'create', component: CreateComponent, canActivate: [AuthGuard] },
   { path: 'update/:id', component: EditComponent, canActivate: [AuthGuard] },
-  { path: '**', redirectTo: '' },
+  { path: '**', redirectTo: '', pathMatch: 'full' },
 ];
 
 @NgModule({
