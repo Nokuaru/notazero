@@ -33,7 +33,7 @@ export class LoginComponent implements OnInit {
           this.displayAlert(error.message);
         });
     } else {
-      this.displayAlert('Ingrese un email o contraseña válido');
+      this.displayAlert('Ingrese un email o contraseña válidos');
     }
   }
 
@@ -61,7 +61,7 @@ export class LoginComponent implements OnInit {
   }
 
   newPasswordSubmit() {
-    if (this.user && this.user.code && this.newPassword) {
+    if (this.user && this.user.code && this.newPassword.trim().length !== 0) {
       this.cognitoService
         .forgotPasswordSubmit(this.user, this.newPassword.trim())
         .then(() => {
@@ -72,7 +72,7 @@ export class LoginComponent implements OnInit {
           this.displayAlert(error.message);
         });
     } else {
-      this.displayAlert('Por favor ingrese bien los datos');
+      this.displayAlert('Datos incorrectos');
     }
   }
 

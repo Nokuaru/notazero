@@ -59,6 +59,7 @@
                 <span>
                   <a
                     (click)="forgotPassword = true"
+                    (click)="forgotPassWordClicked()"
                     class="form-check-label text-muted link-underline link-underline-opacity-0"
                     style="cursor: pointer"
                     >Olvidé mi contraseña
@@ -111,9 +112,8 @@
       <div [hidden]="!forgotPassword">
         <div class="card-header text-center mb-3">
           <h3>Recuperar contraseña</h3>
-          <p>Enviamos un código de verificación a:</p>
-          <p class="text-primary">
-            <strong>{{ user.email }}</strong>
+          <p class="text-success fw-bold">
+            Enviamos un código de verificación a: {{ user.email }}
           </p>
         </div>
 
@@ -122,14 +122,14 @@
             class="form-control mb-3"
             type="text"
             placeholder="Ingrese el código de verificación"
-            name="verificationCode"
+            name="code"
             [(ngModel)]="user.code"
           />
 
           <input
             class="form-control mb-1"
             [type]="user.showPassword ? 'text' : 'password'"
-            name="password"
+            name="newPassword"
             placeholder="Ingrese una nueva Contraseña"
             [(ngModel)]="newPassword"
           />
@@ -153,7 +153,9 @@
         </div>
 
         <div class="row m-1">
-          <button class="btn btn-dark mb-3">Enviar</button>
+          <button (click)="newPasswordSubmit()" class="btn btn-dark mb-3">
+            Confirmar nueva contraseña
+          </button>
         </div>
 
         <div class="d-flex justify-content-center">

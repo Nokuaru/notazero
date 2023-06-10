@@ -32,11 +32,23 @@ export class CognitoService {
   }
 
   // Obtener información del usuario actualmente logueado
-  public getUser(): Promise<string> {
-    return Auth.currentUserInfo().then((userInfo) => {
-      const sub = userInfo.attributes.sub;
-      sessionStorage.setItem('userSub', sub); // Guardar el sub en sessionStorage
-      return sub;
+  public async getUser(): Promise<string> {
+    const userInfo = await Auth.currentUserInfo();
+    const sub = userInfo.attributes.sub;
+    sessionStorage.setItem('userSub', sub); // Guardar el sub en sessionStorage
+    return sub;
+  }
+
+  // Verificar si hay un usuario autenticado
+  public isAuthenticated(): Promise<boolean> {
+    return new Promise<boolean>((resolve, reject) => {
+      Auth.currentAuthenticatedUser()
+        .then(() => {
+          resolve(true); // Usuario autenticado
+        })
+        .catch(() => {
+          resolve(false); // Usuario no autenticado
+        });
     });
   }
 
@@ -55,21 +67,8 @@ export class CognitoService {
     return Auth.forgotPassword(user.email);
   }
 
-  // Envío de nueva contraseña para recuperar contraseña olvidada
+  // Envío de nueva contraseña desde el front para recuperar contraseña olvidada
   public forgotPasswordSubmit(user: User, newPassword: string): Promise<any> {
     return Auth.forgotPasswordSubmit(user.email, user.code, newPassword);
-  }
-
-  // Verificar si hay un usuario autenticado
-  public isAuthenticated(): Promise<boolean> {
-    return new Promise<boolean>((resolve, reject) => {
-      Auth.currentAuthenticatedUser()
-        .then(() => {
-          resolve(true); // Usuario autenticado
-        })
-        .catch(() => {
-          resolve(false); // Usuario no autenticado
-        });
-    });
   }
 }
