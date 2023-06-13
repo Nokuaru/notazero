@@ -1,20 +1,43 @@
 import { Injectable } from '@angular/core';
-import { CanActivate, Router } from '@angular/router';
+import {
+  CanActivate,
+  Router,
+  ActivatedRouteSnapshot,
+  RouterStateSnapshot,
+} from '@angular/router';
+import { CognitoService } from 'src/app/services/cognito.service';
 
-@Injectable({
-  providedIn: 'root',
-})
+@Injectable()
 export class AuthGuard implements CanActivate {
-  constructor(private router: Router) {}
+  constructor(private router: Router, private cognitoService: CognitoService) {}
 
-  canActivate(): boolean {
-    const token = sessionStorage.getItem('token');
-    if (token) {
-      return true; // El token está presente, permite la navegación
+  async canActivate(
+    next: ActivatedRouteSnapshot,
+    state: RouterStateSnapshot
+  ): Promise<boolean> {
+    const isAuthenticated = await this.cognitoService.isAuthenticated();
+    const url = state.url;
+
+    if (url === '/' || url === '/signup') {
+      // Si la URL es '/' o '/signup'
+      if (isAuthenticated) {
+        // Si está autenticado, redirigir a '/home'
+        this.router.navigate(['/home']);
+        return false;
+      } else {
+        // Si no está autenticado, permitir navegación a '/signup'
+        return true;
+      }
     } else {
-      window.location.href =
-        'https://authnotazero.auth.us-east-1.amazoncognito.com/login?client_id=4i1jp7j7jkhscvmco4i2bnkkhf&response_type=token&scope=aws.cognito.signin.user.admin+email+openid+phone&redirect_uri=http%3A%2F%2Flocalhost%3A4200%2F';
-      return false; // Redirige a la URL externa y bloquea la navegación
+      // Si la URL es distinta a '/' y '/signup'
+      if (isAuthenticated) {
+        // Si está autenticado, permitir navegación a todas las páginas
+        return true;
+      } else {
+        // Si no está autenticado, redirigir a '/'
+        this.router.navigate(['/']);
+        return false;
+      }
     }
   }
 }

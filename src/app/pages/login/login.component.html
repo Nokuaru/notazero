@@ -1,23 +1,184 @@
 <div class="bg h-100">
-  <div class="container">
-    <div class="d-flex justify-content-center">
-      <div class="card shadow text-center p-5 mt-5">
-        <img src="assets/logo_200x200.jpg" alt="error" width="200px" class="rounded mx-auto mb-5" />
+  <div class="d-flex justify-content-center align-items-center">
+    <div class="col-11 col-sm-6 col-lg-3 card shadow p-3 mt-5">
+      <img
+        src="assets/logo_200x200.jpg"
+        alt="error"
+        width="200px"
+        class="rounded mx-auto m-3"
+      />
 
-        <h3>Debes iniciar sesión o registrarte para continuar</h3>
+      <!--Login -->
+      <div [hidden]="forgotPassword">
+        <div class="card-header text-center mb-3">
+          <h3>Debes iniciar sesión para continuar</h3>
+        </div>
 
-        <a href="https://authnotazero.auth.us-east-1.amazoncognito.com/login?client_id=4i1jp7j7jkhscvmco4i2bnkkhf&response_type=token&scope=aws.cognito.signin.user.admin+email+openid+phone&redirect_uri=https%3A%2F%2Fandres.d10kksskjz3n1p.amplifyapp.com%2F"
-          class="btn btn-dark">iniciar sesion
-        </a>
+        <form>
+          <input
+            class="form-control mb-3"
+            type="email"
+            name="email"
+            placeholder="Email"
+            [(ngModel)]="user.email"
+            autofocus
+          />
 
-        <br />
+          <input
+            class="form-control mb-2"
+            [type]="user.showPassword ? 'text' : 'password'"
+            name="password"
+            placeholder="Contraseña"
+            [(ngModel)]="user.password"
+          />
 
-        <a href="https://authnotazero.auth.us-east-1.amazoncognito.com/signup?client_id=4i1jp7j7jkhscvmco4i2bnkkhf&response_type=token&scope=aws.cognito.signin.user.admin+email+openid+phone&redirect_uri=https%3A%2F%2Fandres.d10kksskjz3n1p.amplifyapp.com%2F"
-          class="btn btn-secondary">Registrate
-        </a>
+          <div
+            class="alert alert-danger text-center"
+            role="alert"
+            *ngIf="showAlert"
+          >
+            {{ alertMessage }}
+          </div>
+
+          <div class="form-check text-start mb-5">
+            <div class="d-flex align-items-center">
+              <div class="col-6">
+                <input
+                  type="checkbox"
+                  class="form-check-input"
+                  id="checkLogin"
+                  [checked]="user.showPassword"
+                  (change)="user.showPassword = !user.showPassword"
+                />
+                <label class="form-check-label text-muted" for="checkLogin"
+                  >Mostrar contraseña</label
+                >
+              </div>
+
+              <div class="col-6 text-end">
+                <span>
+                  <a
+                    (click)="forgotPassword = true"
+                    (click)="forgotPassWordClicked()"
+                    class="form-check-label text-muted link-underline link-underline-opacity-0"
+                    style="cursor: pointer"
+                    >Olvidé mi contraseña
+                  </a>
+                </span>
+              </div>
+            </div>
+          </div>
+
+          <div class="row m-1">
+            <button class="btn btn-dark mb-3" (click)="signInWithCognito()">
+              Ingresar
+            </button>
+          </div>
+        </form>
+
+        <div class="d-flex justify-content-center">
+          <p>O ingresá con</p>
+        </div>
+
+        <div class="row">
+          <div class="col-6">
+            <div class="d-grid ms-1">
+              <button class="btn btn-primary btn-block mb-3">
+                <i class="bi bi-facebook"></i>
+              </button>
+            </div>
+          </div>
+
+          <div class="col-6">
+            <div class="d-grid me-1">
+              <button class="btn btn-secondary btn-block mb-3">
+                <i class="bi bi-google"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div class="d-flex justify-content-center">
+          <p class="forgot-password me-1">¿No tenés cuenta?</p>
+          <a
+            class="text-secondary fw-bold link-underline-secondary link-underline-opacity-0"
+            routerLink="/signup"
+            >Registrate.</a
+          >
+        </div>
+      </div>
+
+      <!--Olvidé mi contraseña-->
+      <div [hidden]="!forgotPassword">
+        <div class="card-header text-center mb-3">
+          <h3>Recuperar contraseña</h3>
+          <p class="text-success fw-bold">
+            Enviamos un código de verificación a: {{ user.email }}
+          </p>
+        </div>
+
+        <div class="form">
+          <input
+            class="form-control mb-3"
+            type="text"
+            placeholder="Ingrese el código de verificación"
+            name="code"
+            [(ngModel)]="user.code"
+          />
+
+          <input
+            class="form-control mb-1"
+            [type]="user.showPassword ? 'text' : 'password'"
+            name="newPassword"
+            placeholder="Ingrese una nueva Contraseña"
+            [(ngModel)]="newPassword"
+          />
+
+          <div class="form-check text-start mb-5">
+            <div class="d-flex align-items-center">
+              <div class="col-6">
+                <input
+                  type="checkbox"
+                  class="form-check-input"
+                  id="checkForgot"
+                  [checked]="user.showPassword"
+                  (change)="user.showPassword = !user.showPassword"
+                />
+                <label class="form-check-label text-muted" for="checkForgot"
+                  >Mostrar contraseña</label
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="row m-1">
+          <button (click)="newPasswordSubmit()" class="btn btn-dark mb-3">
+            Confirmar nueva contraseña
+          </button>
+        </div>
+
+        <div class="d-flex justify-content-center">
+          <p class="forgot-password me-1">¿Tenés una cuenta?</p>
+          <a
+            class="text-secondary fw-bold link-underline-secondary link-underline-opacity-0"
+            (click)="forgotPassword = false"
+            style="cursor: pointer"
+            >Iniciar sesión.</a
+          >
+        </div>
+
+        <div class="d-flex justify-content-center">
+          <p class="forgot-password me-1">¿No tenés cuenta?</p>
+          <a
+            class="text-secondary fw-bold link-underline-secondary link-underline-opacity-0"
+            routerLink="/signup"
+            >Registrate.</a
+          >
+        </div>
       </div>
     </div>
   </div>
-</div>
 
-<app-footer></app-footer>
+  <app-footer></app-footer>
+</div>
