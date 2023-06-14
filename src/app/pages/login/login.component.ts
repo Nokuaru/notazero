@@ -54,9 +54,7 @@ export class LoginComponent implements OnInit {
           this.displayAlert(error.message);
         });
     } else {
-      this.displayAlert(
-        'Para recuperar su contraseña ingrese en el campo Email un mail valido y vuelva a tocar olvido su contraseña'
-      );
+      this.displayAlert('Para recuperar su contraseña ingrese un email válido');
     }
   }
 
