@@ -12,6 +12,8 @@ import { CrudService } from 'src/app/services/crud.service';
 export class HomeComponent implements OnInit {
   materias: Materias[] = [];
   usuario: User[] = [];
+  userName = sessionStorage.getItem('userName');
+  isLoading: boolean = true;
 
   constructor(
     private crudeService: CrudService,
@@ -19,13 +21,11 @@ export class HomeComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.isLoading = true;
     this.crudeService.getMaterias().subscribe((res: any) => {
       this.usuario = [res.user];
       this.materias = res.materias;
-
-      this.cognitoService.getUser().then((sub: string) => {
-        sessionStorage.setItem('userSub', sub); // Guardar el sub en sessionStorage
-      });
+      this.isLoading = false;
     });
   }
 }
