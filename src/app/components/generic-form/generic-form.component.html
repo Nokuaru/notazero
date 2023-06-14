@@ -1,1 +1,110 @@
-<p>generic-form works!</p>
+<div class="card shadow">
+  <form [formGroup]="formMaterias" (ngSubmit)="onSubmit()" class="p-3">
+
+    <div class="row mb-3">
+      <label class="col-sm-1 col-form-label fw-bold">Materia:</label>
+      <div class="col-sm-11">
+        <input formControlName="description" type="text" class="form-control" />
+      </div>
+    </div>
+
+    <div class="row mb-3">
+      <label class="col-sm-1 col-form-label">Año:</label>
+      <div class="col-sm-1">
+        <input formControlName="price" type="number" class="form-control" />
+      </div>
+
+      <label class="col-sm-1 col-form-label">Cuat.:</label>
+      <div class="col-sm-1">
+        <input formControlName="stock" type="number" class="form-control" />
+      </div>
+
+      <div class="p-3">
+        <p class="col-sm-1 col-form-label">Estado:</p>
+        <select class="col form-select" aria-label="Default">
+          <option value="En curso">En curso</option>
+          <option value="Aprobado">Aprobado</option>
+          <option value="Pendiente">Pendiente</option>
+        </select>
+      </div>
+
+    </div>
+
+    <div class="row">
+
+    </div>
+
+
+    <hr>
+
+    <div class="row mb-3">
+      <label class="col-sm-3 col-form-label">Fecha de primer parcial:</label>
+      <div class="col-sm-3">
+        <input formControlName="price" type="date" class="form-control" />
+      </div>
+
+      <label class="col-sm-1 col-form-label">Nota:</label>
+      <div class="col-sm-1">
+        <input formControlName="stock" type="number" class="form-control" />
+      </div>
+    </div>
+
+    <div class="row mb-3">
+      <label class="col-sm-3 col-form-label">Fecha de segundo parcial:</label>
+      <div class="col-sm-3">
+        <input formControlName="price" type="date" class="form-control" />
+      </div>
+
+      <label class="col-sm-1 col-form-label">Nota:</label>
+      <div class="col-sm-1">
+        <input formControlName="stock" type="number" class="form-control" />
+      </div>
+    </div>
+
+    <div class="row mb-3">
+      <label class="col-sm-3 col-form-label">Fecha recuperatorio:</label>
+      <div class="col-sm-3">
+        <input formControlName="price" type="date" class="form-control" />
+      </div>
+
+      <label class="col-sm-1 col-form-label">Nota:</label>
+      <div class="col-sm-1">
+        <input formControlName="stock" type="number" class="form-control" />
+      </div>
+    </div>
+
+    <div class="row mb-3">
+      <label class="col-sm-3 col-form-label">Fecha de final:</label>
+      <div class="col-sm-3">
+        <input formControlName="price" type="date" class="form-control" />
+      </div>
+
+      <label class="col-sm-1 col-form-label">Nota:</label>
+      <div class="col-sm-1">
+        <input formControlName="stock" type="number" class="form-control" />
+      </div>
+    </div>
+
+    <hr>
+
+    <div class="row mb-3">
+      <label class="col-form-label fw-bold">Recordatorios</label>
+      <div class="col-sm-12">
+        <textarea formControlName="price" class="form-control"></textarea>
+      </div>
+    </div>
+
+
+    <div class="btn-group float-end" role="group">
+      <div class="d-flex justify-content-end mt-3">
+        <button mat-raised-button color="accent">
+          <span>
+            <i class="bi bi-check2-circle"></i>
+          </span>
+          Guardar
+        </button>
+      </div>
+
+    </div>
+  </form>
+</div>

@@ -14,6 +14,7 @@ import { catchError, map } from 'rxjs/operators';
 })
 export class CrudService {
   private REST_API: string;
+  private REST_API_CRUD: string;
   private userId: string;
   httpHeaders = new HttpHeaders().set('Content-Type', 'application/json');
 
@@ -22,6 +23,10 @@ export class CrudService {
 
     // Construir la URL de la API con el userId --> ${userId}
     this.REST_API = `https://ht9pf12136.execute-api.us-east-1.amazonaws.com/items/${this.userId}/materias`;
+
+    // URL para los metodos CREATE, PUT y DELETE materias
+    this.REST_API_CRUD =
+      'https://ht9pf12136.execute-api.us-east-1.amazonaws.com/items';
   }
 
   getMaterias(): Observable<any> {
@@ -30,7 +35,7 @@ export class CrudService {
 
   getMateria(id: any): Observable<any> {
     return this.httpClient
-      .get(`${this.REST_API}/${id}`, { headers: this.httpHeaders })
+      .get(`${this.REST_API_CRUD}/${id}`, { headers: this.httpHeaders })
       .pipe(
         map((res: any) => {
           return res || {};
@@ -41,21 +46,21 @@ export class CrudService {
   createMateria(data: Materias): Observable<any> {
     //ToDo: Ver como cambiar la dirección de API para el PUT
     return this.httpClient
-      .post(this.REST_API, data, { headers: this.httpHeaders })
+      .post(this.REST_API_CRUD, data, { headers: this.httpHeaders })
       .pipe(catchError(this.handleError));
   }
 
   updateMateria(id: any, data: any): Observable<any> {
     //ToDo: Ver como cambiar la dirección de API para el PUT
     return this.httpClient
-      .put(`${this.REST_API}/${id}`, data, { headers: this.httpHeaders })
+      .put(`${this.REST_API_CRUD}/${id}`, data, { headers: this.httpHeaders })
       .pipe(catchError(this.handleError));
   }
 
   deleteMateria(id: any): Observable<any> {
     //ToDo: Ver como cambar la rireccion de API para el DELETE
     return this.httpClient
-      .delete(`${this.REST_API}/${id}`, { headers: this.httpHeaders })
+      .delete(`${this.REST_API_CRUD}/${id}`, { headers: this.httpHeaders })
       .pipe(catchError(this.handleError));
   }
 
