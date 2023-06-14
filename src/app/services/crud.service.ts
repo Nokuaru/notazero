@@ -19,7 +19,6 @@ export class CrudService {
 
   constructor(private httpClient: HttpClient) {
     this.userId = sessionStorage.getItem('userSub') || '';
-    console.log(this.userId);
 
     // Construir la URL de la API con el userId --> ${userId}
     this.REST_API = `https://ht9pf12136.execute-api.us-east-1.amazonaws.com/items/${this.userId}/materias`;

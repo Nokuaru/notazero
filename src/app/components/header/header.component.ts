@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { User } from 'src/app/models/user.model';
 import { CognitoService } from 'src/app/services/cognito.service';
@@ -8,10 +8,20 @@ import { CognitoService } from 'src/app/services/cognito.service';
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.css'],
 })
-export class HeaderComponent {
+export class HeaderComponent implements OnInit {
+  userName: string;
   constructor(private router: Router, private cognitoService: CognitoService) {}
+
+  ngOnInit(): void {
+    this.cognitoService.getUser().then(() => {
+      this.userName = sessionStorage.getItem('userName');
+    });
+  }
+
   signOut() {
-    sessionStorage.removeItem('userSub'); // Borrar el valor del sessionStorage
-    this.cognitoService.signOut();
+    this.cognitoService.signOut().then(() => {
+      sessionStorage.clear();
+      this.router.navigate(['/']);
+    });
   }
 }
