@@ -22,6 +22,7 @@ export class HomeComponent implements OnInit {
 
   ngOnInit(): void {
     this.isLoading = true;
+    this.cognitoService.getUser();
 
     this.cognitoService.getUser().then(() => {
       this.userName = sessionStorage.getItem('userName');

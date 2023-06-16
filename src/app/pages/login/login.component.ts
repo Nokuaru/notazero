@@ -16,11 +16,11 @@ export class LoginComponent implements OnInit {
   forgotPassword: boolean = false;
   isForgotPassword: boolean = false;
   newPassword: string = '';
+
   constructor(private router: Router, private cognitoService: CognitoService) {}
 
   ngOnInit(): void {
     this.user = {} as User;
-    this.cognitoService.getUser();
   }
 
   signInWithCognito() {
