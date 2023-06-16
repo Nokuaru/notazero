@@ -2,17 +2,17 @@ export interface Materias {
   userId: string;
   materiaId: string;
   materia: string;
-  anio: number;
-  cuatrimestre: number;
+  anio: string;
+  cuatrimestre: string;
   estado: string;
   horario: string;
   fechaPrimerParcial: string;
-  notaPrimerParcial: number;
+  notaPrimerParcial: string;
   fechaSegundoParcial: string;
-  notaSegundoParcial: number;
+  notaSegundoParcial: string;
   fechaRecuperatorio: string;
-  notaRecuperatorio: number;
+  notaRecuperatorio: string;
   fechaFinal: string;
-  notaFinal: number;
+  notaFinal: string;
   observaciones: string;
 }

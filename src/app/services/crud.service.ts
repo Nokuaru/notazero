@@ -13,21 +13,14 @@ import { catchError, map } from 'rxjs/operators';
   providedIn: 'root',
 })
 export class CrudService {
-  private REST_API: string;
-  private REST_API_CRUD: string;
-  private userId: string;
+  private userId: string = sessionStorage.getItem('userSub') || '';
+  private REST_API: string = `https://ht9pf12136.execute-api.us-east-1.amazonaws.com/items/${this.userId}/materias`;
+  private REST_API_CRUD: string =
+    'https://ht9pf12136.execute-api.us-east-1.amazonaws.com/items';
+
   httpHeaders = new HttpHeaders().set('Content-Type', 'application/json');
 
-  constructor(private httpClient: HttpClient) {
-    this.userId = sessionStorage.getItem('userSub') || '';
-
-    // Construir la URL de la API con el userId --> ${userId}
-    this.REST_API = `https://ht9pf12136.execute-api.us-east-1.amazonaws.com/items/${this.userId}/materias`;
-
-    // URL para los metodos CREATE, PUT y DELETE materias
-    this.REST_API_CRUD =
-      'https://ht9pf12136.execute-api.us-east-1.amazonaws.com/items';
-  }
+  constructor(private httpClient: HttpClient) {}
 
   getMaterias(): Observable<any> {
     return this.httpClient.get(this.REST_API, { headers: this.httpHeaders });
@@ -44,9 +37,8 @@ export class CrudService {
   }
 
   createMateria(data: Materias): Observable<any> {
-    //ToDo: Ver como cambiar la dirección de API para el PUT
     return this.httpClient
-      .post(this.REST_API_CRUD, data, { headers: this.httpHeaders })
+      .put(this.REST_API_CRUD, data, { headers: this.httpHeaders })
       .pipe(catchError(this.handleError));
   }
 
