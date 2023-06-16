@@ -28,7 +28,9 @@ export class CrudService {
 
   getMateria(id: any): Observable<any> {
     return this.httpClient
-      .get(`${this.REST_API_CRUD}/${id}`, { headers: this.httpHeaders })
+      .get(`${this.REST_API}/${id}`, {
+        headers: this.httpHeaders,
+      })
       .pipe(
         map((res: any) => {
           return res || {};
@@ -43,14 +45,12 @@ export class CrudService {
   }
 
   updateMateria(id: any, data: any): Observable<any> {
-    //ToDo: Ver como cambiar la dirección de API para el PUT
     return this.httpClient
       .put(`${this.REST_API_CRUD}/${id}`, data, { headers: this.httpHeaders })
       .pipe(catchError(this.handleError));
   }
 
   deleteMateria(id: any): Observable<any> {
-    //ToDo: Ver como cambar la rireccion de API para el DELETE
     return this.httpClient
       .delete(`${this.REST_API_CRUD}/${id}`, { headers: this.httpHeaders })
       .pipe(catchError(this.handleError));
