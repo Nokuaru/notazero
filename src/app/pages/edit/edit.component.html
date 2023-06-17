@@ -1,71 +1,9 @@
 <app-header></app-header>
 <div class="container">
   <div class="mt-3 mt-sm-5 mb-sm-4">
-    <h1 class="fs-2">{{ "Nombre de la materia" }}</h1>
-  </div>
+    <h1 class="fs-2">Editar materia</h1>
 
-  <div class="d-flex justify-content-end mt-3 mb-3">
-    <a routerLink="/update" mat-raised-button>
-      <span>
-        <i class="bi bi-pencil-square"></i>
-      </span>
-      Guardar cambios
-    </a>
-  </div>
-
-  <div class="card p-3 mb-5 shadow">
-    <div class="row">
-      <div class="col-12 mb-2">
-        <h3 class="fw-bold">Materia: {{ "Nombre de la materia" }}</h3>
-      </div>
-
-      <div class="col-3 mb-2">Año: {{ "1°" }}</div>
-      <div class="col-3 mb-2">Cuatrimestre: {{ "2°" }}</div>
-      <div class="col-3 mb-2">Estado: {{ "En curso" }}</div>
-
-      <hr />
-
-      <div class="col-12 mb-2">
-        <h3 class="fw-bold">Calificaciones</h3>
-      </div>
-
-      <div class="col-3 mb-2">Fecha primer parcial: {{ "22/05/2023" }}</div>
-      <div class="col-9 mb-2">Nota: {{ "9" }}</div>
-
-      <div class="col-3 mb-2">Fecha segundo parcial: {{ "15/06/2023" }}</div>
-      <div class="col-9 mb-2">Nota: {{ "8" }}</div>
-
-      <div class="col-3 mb-2">Fecha recuperatorio: {{ "18/06/2023" }}</div>
-      <div class="col-9 mb-2">Nota: {{ "" }}</div>
-
-      <div class="col-3 mb-2">Fecha examen final: {{ "30/06/2023" }}</div>
-      <div class="col-9 mb-2">Nota: {{ "" }}</div>
-
-      <hr />
-
-      <div class="col-12">
-        <h3 class="fw-bold">Recordatorios:</h3>
-      </div>
-
-      <div class="col-12 h-100">
-        <form>
-          <textarea
-            class="form-control h-100"
-            name="observaciones"
-            rows="5"
-          ></textarea>
-
-          <div class="d-flex justify-content-end mt-3 mb-3">
-            <button mat-raised-button color="accent">
-              <span>
-                <i class="bi bi-check2-circle"></i>
-              </span>
-              Guardar cambios
-            </button>
-          </div>
-        </form>
-      </div>
-    </div>
+    <app-generic-form *ngIf="materia" [modelMaterias]="materia" (submitValues)="onSubmit($event)"></app-generic-form>
   </div>
 </div>
 

@@ -1,1 +1,110 @@
-<p>generic-form works!</p>
+<div class="card shadow p-3">
+  <form [formGroup]="formMaterias" (ngSubmit)="onSubmit()" class="p-3">
+
+    <div class="row mb-3">
+      <label class="col-sm-1 col-form-label fw-bold">Materia:</label>
+      <div class="col-sm-11">
+        <input formControlName="materia" type="text" class="form-control" />
+      </div>
+    </div>
+
+
+    <div class="row">
+      <label class="col-sm-1 col-form-label">Año:</label>
+      <div class="col-sm-1">
+        <input formControlName="anio" type="text" class="form-control" />
+      </div>
+
+      <label class="col-sm-1 col-form-label">Cuat.:</label>
+      <div class="col-sm-1">
+        <input formControlName="cuatrimestre" type="text" class="form-control" />
+      </div>
+
+      <p class="col-sm-1 col-form-label">Estado:</p>
+      <div class="col-sm-2">
+        <select class="form-select" aria-label="Default" formControlName="estado">
+          <option value="En curso">En curso</option>
+          <option value="Aprobado">Aprobado</option>
+          <option value="Pendiente">Pendiente</option>
+        </select>
+      </div>
+
+      <label class="col-sm-1 col-form-label">Horario:</label>
+      <div class="col-sm-4">
+        <input formControlName="horario" type="text" class="form-control" />
+      </div>
+    </div>
+
+    <hr>
+
+    <div class="row mb-3">
+      <label class="col-sm-3 col-form-label">Fecha de primer parcial:</label>
+      <div class="col-sm-3">
+        <input formControlName="fechaPrimerParcial" type="date" class="form-control" />
+      </div>
+
+      <label class="col-sm-1 col-form-label">Nota:</label>
+      <div class="col-sm-1">
+        <input formControlName="notaPrimerParcial" type="text" class="form-control" />
+      </div>
+    </div>
+
+    <div class="row mb-3">
+      <label class="col-sm-3 col-form-label">Fecha de segundo parcial:</label>
+      <div class="col-sm-3">
+        <input formControlName="fechaSegundoParcial" type="date" class="form-control" />
+      </div>
+
+      <label class="col-sm-1 col-form-label">Nota:</label>
+      <div class="col-sm-1">
+        <input formControlName="notaSegundoParcial" type="text" class="form-control" />
+      </div>
+    </div>
+
+    <div class="row mb-3">
+      <label class="col-sm-3 col-form-label">Fecha recuperatorio:</label>
+      <div class="col-sm-3">
+        <input formControlName="fechaRecuperatorio" type="date" class="form-control" />
+      </div>
+
+      <label class="col-sm-1 col-form-label">Nota:</label>
+      <div class="col-sm-1">
+        <input formControlName="notaRecuperatorio" type="text" class="form-control" />
+      </div>
+    </div>
+
+    <div class="row mb-3">
+      <label class="col-sm-3 col-form-label">Fecha de final:</label>
+      <div class="col-sm-3">
+        <input formControlName="fechaFinal" type="date" class="form-control" />
+      </div>
+
+      <label class="col-sm-1 col-form-label">Nota:</label>
+      <div class="col-sm-1">
+        <input formControlName="notaFinal" type="text" class="form-control" />
+      </div>
+    </div>
+
+    <hr>
+
+    <div class="row mb-3">
+      <label class="col-form-label fw-bold">Recordatorios</label>
+      <div class="col-sm-12">
+        <textarea formControlName="observaciones" class="form-control"></textarea>
+      </div>
+    </div>
+
+
+    <div class="btn-group float-end" role="group">
+      <div class="d-flex justify-content-end mt-3">
+        <button mat-raised-button color="accent" [disabled]="!formValid">
+          <span>
+            <i class="bi bi-check2-circle"></i>
+          </span>
+          Guardar
+        </button>
+      </div>
+
+    </div>
+  </form>
+</div>

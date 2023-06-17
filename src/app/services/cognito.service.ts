@@ -35,7 +35,11 @@ export class CognitoService {
   public async getUser(): Promise<string> {
     const userInfo = await Auth.currentUserInfo();
     const sub = userInfo.attributes.sub;
+    const name = userInfo.attributes.name;
+    const email = userInfo.attributes.email;
     sessionStorage.setItem('userSub', sub); // Guardar el sub en sessionStorage
+    sessionStorage.setItem('userName', name); // Guardar el nombre en sessionStorage
+    sessionStorage.setItem('userEmail', email); // Guardar el correo electrónico en sessionStorage
     return sub;
   }
 
