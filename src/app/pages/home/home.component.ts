@@ -28,8 +28,8 @@ export class HomeComponent implements OnInit {
       this.userName = sessionStorage.getItem('userName');
     });
 
-    this.crudService.getMaterias().subscribe((res: any) => {
-      this.materias = res.materias;
+    this.crudService.getMaterias().subscribe((materias: Materias[]) => {
+      this.materias = materias;
       this.isLoading = false;
     });
   }

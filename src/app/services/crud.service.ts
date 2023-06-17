@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Inject } from '@angular/core';
 import { Materias } from '../models/materias.model';
 
 import {
@@ -14,16 +14,20 @@ import { catchError, map } from 'rxjs/operators';
 })
 export class CrudService {
   private userId: string = sessionStorage.getItem('userSub') || '';
-  private REST_API: string = `https://ht9pf12136.execute-api.us-east-1.amazonaws.com/items/${this.userId}/materias`;
-  private REST_API_CRUD: string =
-    'https://ht9pf12136.execute-api.us-east-1.amazonaws.com/items';
+  private REST_API: string = `https://ht9pf12136.execute-api.us-east-1.amazonaws.com/api/${this.userId}/subjects`;
 
   httpHeaders = new HttpHeaders().set('Content-Type', 'application/json');
 
   constructor(private httpClient: HttpClient) {}
 
-  getMaterias(): Observable<any> {
-    return this.httpClient.get(this.REST_API, { headers: this.httpHeaders });
+  getMaterias(): Observable<any[]> {
+    return this.httpClient
+      .get<any[]>(this.REST_API, { headers: this.httpHeaders })
+      .pipe(
+        map((res: any) => {
+          return res.subjects || [];
+        })
+      );
   }
 
   getMateria(id: any): Observable<any> {
@@ -40,19 +44,19 @@ export class CrudService {
 
   createMateria(data: Materias): Observable<any> {
     return this.httpClient
-      .put(this.REST_API_CRUD, data, { headers: this.httpHeaders })
+      .put(this.REST_API, data, { headers: this.httpHeaders })
       .pipe(catchError(this.handleError));
   }
 
   updateMateria(id: any, data: any): Observable<any> {
     return this.httpClient
-      .put(`${this.REST_API_CRUD}/${id}`, data, { headers: this.httpHeaders })
+      .put(`${this.REST_API}/${id}`, data, { headers: this.httpHeaders })
       .pipe(catchError(this.handleError));
   }
 
   deleteMateria(id: any): Observable<any> {
     return this.httpClient
-      .delete(`${this.REST_API_CRUD}/${id}`, { headers: this.httpHeaders })
+      .delete(`${this.REST_API}/${id}`, { headers: this.httpHeaders })
       .pipe(catchError(this.handleError));
   }
 

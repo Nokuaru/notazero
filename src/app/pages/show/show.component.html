@@ -2,8 +2,8 @@
 <div class="container" *ngIf="materia">
   <div class="d-flex align-items-center mt-3 mt-sm-5 mb-sm-4">
     <h1 class="fs-2">{{ materia.materia }}</h1>
-    <a class="btn" routerLink="/update/{{ materia.materiaId }}"><i
-        class="bi bi-pencil-square text-secondary link-underline-secondary link-underline-opacity-0"></i></a>
+    <a class="btn btn-sm text-muted" routerLink="/update/{{ materia.materiaId }}"><i
+        class="bi bi-pencil-square text-secondary link-underline-secondary link-underline-opacity-0 me-1"></i>Editar</a>
   </div>
 
   <div class="card p-3 mb-5 shadow">
@@ -41,11 +41,20 @@
       </div>
 
       <div class="col-12 h-100">
-        <form>
+        <div>
           <textarea class="form-control h-100" name="observaciones" rows="5"
             value="{{ materia.observaciones }}"></textarea>
-        </form>
+        </div>
       </div>
+
+
+      <div class="d-flex justify-content-end mt-3">
+        <button class="btn btn-sm btn-danger" (click)="delete()">
+          <i class="bi bi-trash3"></i>
+        </button>
+      </div>
+
+
     </div>
   </div>
 </div>
