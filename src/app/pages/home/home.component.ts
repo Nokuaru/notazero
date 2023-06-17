@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Materias } from 'src/app/models/materias.model';
 import { User } from 'src/app/models/user.model';
-import { CognitoService } from 'src/app/services/cognito.service';
 import { CrudService } from 'src/app/services/crud.service';
 
 @Component({
@@ -15,18 +14,10 @@ export class HomeComponent implements OnInit {
   userName: string;
   isLoading: boolean = true;
 
-  constructor(
-    private crudService: CrudService,
-    private cognitoService: CognitoService
-  ) {}
+  constructor(private crudService: CrudService) {}
 
   ngOnInit(): void {
     this.isLoading = true;
-    this.cognitoService.getUser();
-
-    this.cognitoService.getUser().then(() => {
-      this.userName = sessionStorage.getItem('userName');
-    });
 
     this.crudService.getMaterias().subscribe((materias: Materias[]) => {
       this.materias = materias;
