@@ -1,5 +1,6 @@
 import { Injectable, Inject } from '@angular/core';
 import { Materias } from '../models/materias.model';
+import { environment } from 'src/environments/environment';
 
 import {
   HttpClient,
@@ -14,7 +15,7 @@ import { catchError, map } from 'rxjs/operators';
 })
 export class CrudService {
   private userId: string = sessionStorage.getItem('userSub') || '';
-  private REST_API: string = `https://ht9pf12136.execute-api.us-east-1.amazonaws.com/api/${this.userId}/subjects`;
+  private REST_API: string = `${environment.api.API_URL}/api/${this.userId}/subjects`;
 
   httpHeaders = new HttpHeaders().set('Content-Type', 'application/json');
 
