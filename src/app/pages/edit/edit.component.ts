@@ -24,7 +24,7 @@ export class EditComponent implements OnInit {
     this.crudService.getMateria(this.id).subscribe((res) => {
       this.materia = {
         userId: this.id,
-        materiaId: res.materiaId,
+        subjectId: res.subjectId,
         materia: res.materia,
         anio: res.anio,
         cuatrimestre: res.cuatrimestre,

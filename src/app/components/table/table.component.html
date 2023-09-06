@@ -17,16 +17,19 @@
         <td>{{ materia.materia }}</td>
         <td>{{ materia.horario }}</td>
         <td>
-          <span class="badge rounded-pill" [ngClass]="{
+          <span
+            class="badge rounded-pill"
+            [ngClass]="{
               'bg-primary text-white': materia.estado === 'En curso',
               'bg-secondary text-white': materia.estado === 'Pendiente',
               'bg-success text-white': materia.estado === 'Aprobado'
-            }">
+            }"
+          >
             {{ materia.estado }}
           </span>
         </td>
         <td>
-          <a routerLink="/show/{{materia.materiaId}}" class="btn btn-sm">
+          <a routerLink="/show/{{ materia.subjectId }}" class="btn btn-sm">
             <i class="bi bi-box-arrow-up-right text-muted"></i>
           </a>
         </td>
