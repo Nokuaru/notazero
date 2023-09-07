@@ -25,7 +25,7 @@ export class GenericFormComponent implements OnInit {
       anio: ['', Validators.required],
       cuatrimestre: ['', Validators.required],
       estado: ['', Validators.required],
-      horario: ['', Validators.required],
+      horario: [''],
       fechaPrimerParcial: [''],
       notaPrimerParcial: [''],
       fechaSegundoParcial: [''],

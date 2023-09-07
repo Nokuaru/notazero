@@ -1,6 +1,6 @@
 export interface Materias {
   userId: string;
-  materiaId: string;
+  subjectId: string;
   materia: string;
   anio: string;
   cuatrimestre: string;
